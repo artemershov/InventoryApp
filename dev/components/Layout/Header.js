@@ -6,11 +6,11 @@ import NavbarToggler from 'reactstrap/lib/NavbarToggler';
 import Nav from 'reactstrap/lib/Nav';
 import NavItem from 'reactstrap/lib/NavItem';
 import { Link } from 'react-router-dom';
-import UserMenu from './UserMenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons/faBoxOpen';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons/faPlusCircle';
 import styled from 'styled-components';
+import UserMenu from './UserMenu';
 
 const Brand = styled(Link)`
   font-size: 22px;
@@ -20,7 +20,9 @@ const Brand = styled(Link)`
 
 export class Header extends Component {
   state = { isOpen: false };
+
   toggle = () => this.setState({ isOpen: !this.state.isOpen });
+
   render() {
     const linkClass = url =>
       `nav-link ${this.props.location == url && 'active'}`;

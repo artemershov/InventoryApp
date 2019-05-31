@@ -1,7 +1,7 @@
 import React from 'react';
+import Button from 'reactstrap/lib/Button';
 import Form from '../Form';
 import Input from '../Form/Input';
-import Button from 'reactstrap/lib/Button';
 import { errorMessages } from '../Form/validation';
 
 export const SignIn = props => (

@@ -17,14 +17,17 @@ export const actions = {
   get: () => dispatch => {
     dispatch({ type: actionTypes.get, data: getData() });
   },
+
   add: data => dispatch => {
     inventoryApp.userAdd(data);
     dispatch({ type: actionTypes.add, data: getData() });
   },
+
   edit: data => dispatch => {
     inventoryApp.userEdit(data);
     dispatch({ type: actionTypes.edit, data: getData() });
   },
+
   remove: password => dispatch => {
     inventoryApp.userRemove(password);
     dispatch({ type: actionTypes.remove, data: getData() });

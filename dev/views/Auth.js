@@ -15,6 +15,7 @@ import { inventoryApp } from '../redux/';
 
 export class Auth extends Component {
   state = { status: null };
+
   onSubmit = data => {
     const trimed = Object.keys(data).reduce((obj, key) => {
       obj[key] = data[key].trim();
@@ -26,27 +27,30 @@ export class Auth extends Component {
     this.setState({ status });
     if (status == '0') dispatch(userActions.get());
   };
+
   onChange = () => this.setState({ status: null });
+
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
       this.setState({ status: null });
     }
   }
+
   render() {
     const { status } = this.state;
     const { pathname } = this.props.location;
     const data =
       pathname == '/signin'
         ? {
-            title: 'Sign In',
-            form: <SignIn onSubmit={this.onSubmit} onChange={this.onChange} />,
-            link: <Link to="/signup">Create account</Link>,
-          }
+          title: 'Sign In',
+          form: <SignIn onSubmit={this.onSubmit} onChange={this.onChange} />,
+          link: <Link to="/signup">Create account</Link>,
+        }
         : {
-            title: 'Sign Up',
-            form: <SignUp onSubmit={this.onSubmit} onChange={this.onChange} />,
-            link: <Link to="/signin">Already have an account?</Link>,
-          };
+          title: 'Sign Up',
+          form: <SignUp onSubmit={this.onSubmit} onChange={this.onChange} />,
+          link: <Link to="/signin">Already have an account?</Link>,
+        };
     return (
       <Container className="d-flex justify-content-center align-items-center py-4">
         <Row className="justify-content-center w-100">

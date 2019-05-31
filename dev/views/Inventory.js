@@ -1,18 +1,18 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
-import { actions as itemsActions } from '../redux/items';
-import { actions as categoriesActions } from '../redux/categories';
-import Header from '../components/Layout/Header';
 import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Card from 'reactstrap/lib/Card';
 import CardBody from 'reactstrap/lib/CardBody';
+import styled from 'styled-components';
+import Header from '../components/Layout/Header';
 import ItemsAddForm from '../components/Inventory/ItemsAddForm';
 import ItemsList from '../components/Inventory/ItemsList';
 import ItemsDetails from '../components/Inventory/ItemsDetails';
 import Categories from '../components/Inventory/Categories';
-import styled from 'styled-components';
+import { actions as itemsActions } from '../redux/items';
+import { actions as categoriesActions } from '../redux/categories';
 
 const Title = styled.h3`
   color: #359fe0;
@@ -29,18 +29,22 @@ export class Inventory extends Component {
     categoriesModal: false,
     currentItem: null,
   };
+
   handleCategoriesModal = e => {
     e.preventDefault();
     this.setState(prevState => ({
       categoriesModal: !prevState.categoriesModal,
     }));
   };
+
   handleDetails = id => this.setState({ currentItem: id });
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(itemsActions.get());
     dispatch(categoriesActions.get());
   }
+
   render() {
     const { pathname } = this.props.location;
     return (

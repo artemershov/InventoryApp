@@ -10,13 +10,11 @@ export class Session {
 }
 
 export default class SessionList extends List {
-  constructor(data) {
-    super(data);
-  }
   add(data) {
     const item = new Session(this.lastId + 1, data);
     return super.add(item);
   }
+
   getSessionByToken(token) {
     if (!token) return;
     return filter(this.list, session => session.token == token)[0];

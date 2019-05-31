@@ -32,6 +32,7 @@ export default class App {
       this.categories = null;
     }
   }
+
   itemAdd(data) {
     if (!this.user) return;
     const id = this.items.add({ ...data, uid: this.user.id });
@@ -39,6 +40,7 @@ export default class App {
     this.updateStorage();
     return id;
   }
+
   itemEdit(id, data) {
     if (!this.user) return;
     const item = this.items.list[id];
@@ -50,6 +52,7 @@ export default class App {
     this.updateStorage();
     return id;
   }
+
   itemRemove(id) {
     if (!this.user) return;
     const item = this.items.list[id];
@@ -58,18 +61,21 @@ export default class App {
     this.updateStorage();
     return id;
   }
+
   categoryAdd(data) {
     if (!this.user) return;
     const id = this.categories.add({ ...data, uid: this.user.id });
     this.updateStorage();
     return id;
   }
+
   categoryEdit(id, data) {
     if (!this.user) return;
     this.categories.edit(id, data);
     this.updateStorage();
     return id;
   }
+
   categoryRemove(id) {
     if (!this.user) return;
     const category = this.categories.list[id];
@@ -78,6 +84,7 @@ export default class App {
     this.updateStorage();
     return id;
   }
+
   userAdd(data) {
     const id = this.users.add({
       login: data.login,
@@ -89,12 +96,14 @@ export default class App {
     this.updateStorage();
     return id;
   }
+
   userEdit(data) {
     if (!this.user) return;
     this.users.edit(this.user.id, data);
     this.updateStorage();
     return this.user.id;
   }
+
   userRemove(password) {
     if (!this.user) return false;
     const { id, login } = this.user;
@@ -106,6 +115,7 @@ export default class App {
     }
     return false;
   }
+
   signIn(data) {
     const { login, password } = data;
     if (!login || !password) return '3';
@@ -123,6 +133,7 @@ export default class App {
     }
     return '4';
   }
+
   signUp(data) {
     if (this.users.getUserByLogin(data.login)) {
       return '1';
@@ -131,6 +142,7 @@ export default class App {
       return this.signIn(data);
     }
   }
+
   signOut() {
     const session = this.sessions.getSessionByToken(this.storage.data.token);
     this.sessions.remove(session.id);
@@ -140,6 +152,7 @@ export default class App {
     this.token = undefined;
     this.updateStorage();
   }
+
   updateStorage() {
     if (this.user) {
       this.users.edit(this.user.id, {

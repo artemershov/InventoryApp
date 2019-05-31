@@ -26,10 +26,13 @@ const ImageContainer = styled.div`
 `;
 
 export class ItemsImage extends Component {
-  state = { src: null, rej: null };
+  state = { src: null };
+
+  promiseReject = null;
+
   checkValidImage = src => {
     new Promise((res, rej) => {
-      this.setState({ rej });
+      this.promiseReject = rej;
       if (src) {
         const img = new Image();
         img.onload = () => res(src);
@@ -40,13 +43,17 @@ export class ItemsImage extends Component {
       }
     }).then(src => this.setState({ src }), () => {});
   };
+
   componentDidMount = () => {
     this.checkValidImage(this.props.src);
   };
+
   componentDidUpdate = prevProps => {
     if (prevProps.src !== this.props.src) this.checkValidImage(this.props.src);
   };
-  componentWillUnmount = () => this.state.rej();
+
+  componentWillUnmount = () => this.promiseReject();
+
   render = () => (
     <ImageWrapper className={this.props.className}>
       <ImageContainer src={this.state.src}>

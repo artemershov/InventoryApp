@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actions as categoriesActions } from '../../redux/categories';
+import Col from 'reactstrap/lib/Col';
+import Button from 'reactstrap/lib/Button';
+import ListGroup from 'reactstrap/lib/ListGroup';
+import ListGroupItem from 'reactstrap/lib/ListGroupItem';
 import Modal from 'reactstrap/lib/Modal';
 import ModalHeader from 'reactstrap/lib/ModalHeader';
 import ModalBody from 'reactstrap/lib/ModalBody';
 import ModalFooter from 'reactstrap/lib/ModalFooter';
-import ListGroup from 'reactstrap/lib/ListGroup';
-import ListGroupItem from 'reactstrap/lib/ListGroupItem';
-import { RowXS as Row } from '../Layout/Row';
-import Col from 'reactstrap/lib/Col';
-import Form from '../Form';
-import Input from '../Form/Input';
-import Button from 'reactstrap/lib/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons/faFolderOpen';
+import { RowXS as Row } from '../Layout/Row';
+import Form from '../Form';
+import Input from '../Form/Input';
 import { errorMessages } from '../Form/validation';
+import { actions as categoriesActions } from '../../redux/categories';
 
 export class Categories extends Component {
   onSubmit = data => {
     this.props.dispatch(categoriesActions.add(data));
     this.form.reset();
   };
+
   handleRemove = id => () => {
     if (
       confirm(
@@ -32,6 +33,7 @@ export class Categories extends Component {
       this.props.dispatch(categoriesActions.remove(id));
     }
   };
+
   render() {
     const { open, toggle, categories } = this.props;
     return (

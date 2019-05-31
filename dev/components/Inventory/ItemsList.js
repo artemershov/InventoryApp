@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
-import { actions as itemsActions } from '../../redux/items';
 import Input from 'reactstrap/lib/Input';
 import InputGroup from 'reactstrap/lib/InputGroup';
 import InputGroupAddon from 'reactstrap/lib/InputGroupAddon';
@@ -11,6 +10,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons/faTimes';
 import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
 import { faBoxOpen } from '@fortawesome/free-solid-svg-icons/faBoxOpen';
 import styled from 'styled-components';
+import { actions as itemsActions } from '../../redux/items';
 
 const FixedTable = styled(Table)`
   @media (max-width: 768px) {
@@ -39,6 +39,7 @@ export class ItemsList extends Component {
     filtered: [],
     query: '',
   };
+
   handleFilter = e => {
     const { items } = this.props;
     const query = e.target.value.trim();
@@ -48,25 +49,28 @@ export class ItemsList extends Component {
     );
     this.setState({ filtered, query });
   };
+
   handleDetails = item => e => {
     e.preventDefault();
     this.props.handleDetails(item);
   };
+
   handleRemove = id => () => {
     if (confirm('Are you sure you want to delete this product?')) {
       this.props.dispatch(itemsActions.remove(id));
     }
   };
+
   render() {
     const { items, categories } = this.props;
     const { query, filtered } = this.state;
     const data = categories
       ? categories.map(cat => ({
-          ...cat,
-          items: (query ? filtered : items).filter(i =>
-            cat.items.includes(i.id)
-          ),
-        }))
+        ...cat,
+        items: (query ? filtered : items).filter(i =>
+          cat.items.includes(i.id)
+        ),
+      }))
       : [];
     return items && items.length ? (
       <Fragment>

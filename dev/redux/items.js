@@ -16,16 +16,19 @@ export const actions = {
   get: () => dispatch => {
     dispatch({ type: actionTypes.get, data: getData() });
   },
+
   add: data => dispatch => {
     inventoryApp.itemAdd(data);
     dispatch({ type: actionTypes.add, data: getData() });
     dispatch(categoriesActions.get());
   },
+
   edit: (id, data) => dispatch => {
     inventoryApp.itemEdit(id, data);
     dispatch({ type: actionTypes.edit, id, data: getData() });
     dispatch(categoriesActions.get());
   },
+
   remove: id => dispatch => {
     inventoryApp.itemRemove(id);
     dispatch({ type: actionTypes.remove, data: getData() });

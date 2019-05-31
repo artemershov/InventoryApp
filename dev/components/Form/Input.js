@@ -7,6 +7,7 @@ import FormFeedback from 'reactstrap/lib/FormFeedback';
 
 export class Input extends React.Component {
   onChange = e => this.props.setValue(e.currentTarget.value);
+
   render = () => {
     const errorMessage = this.props.getErrorMessage();
     const valid = this.props.isValid();

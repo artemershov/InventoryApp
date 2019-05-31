@@ -13,21 +13,21 @@ export class User {
 }
 
 export default class UserList extends List {
-  constructor(data) {
-    super(data);
-  }
   add(data) {
     const user = new User(this.lastId + 1, data);
     return super.add(user);
   }
+
   edit(id, data) {
     const user = new User(id, { ...this.list[id], ...data });
     this.setList({ ...this.list, [id]: user });
     return id;
   }
+
   getUserByLogin(login) {
     return filter(this.list, user => user.login == login)[0];
   }
+
   checkPassword(login, password) {
     const user = this.getUserByLogin(login);
     if (!user) return false;

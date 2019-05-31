@@ -44,6 +44,6 @@
     "prettier": "npx prettier --write dev/{,**}/*",
     "build": "rm -rf build && npx parcel build dev/index.html -d build --no-source-maps",
     "deploy": "cp build/index.html build/200.html && npx surge build myinventoryapp.surge.sh",
-    "clean": "rm -rf .cache build dist node_modules yarn* package-lock.json"
+    "clean": "rm -rf .cache build dist node_modules yarn-error.log"
   }
 }

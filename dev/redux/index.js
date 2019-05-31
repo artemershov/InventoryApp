@@ -1,10 +1,10 @@
 import App from '../classes/App';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 import { reducer as userReducer } from './user';
 import { reducer as itemsReducer } from './items';
 import { reducer as categoryReducer } from './categories';
-import logger from 'redux-logger';
-import thunk from 'redux-thunk';
 
 export const inventoryApp = new App();
 

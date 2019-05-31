@@ -1,6 +1,5 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
-import { actions as itemsActions } from '../../redux/items';
 import Row from 'reactstrap/lib/Row';
 import Col from 'reactstrap/lib/Col';
 import Badge from 'reactstrap/lib/Badge';
@@ -10,8 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons/faFileAlt';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
 import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
-import ItemsImage from './ItemsImage';
 import styled from 'styled-components';
+import ItemsImage from './ItemsImage';
+import { actions as itemsActions } from '../../redux/items';
 
 const Title = styled.h4`
   font-size: 24px;
@@ -58,6 +58,7 @@ const BorderBox = styled.div`
 
 export class ItemsDetails extends Component {
   state = { item: null };
+
   handleQuantiy = increment => () => {
     const { id, quantity } = this.state.item;
     const newQuantity = quantity + increment;
@@ -65,6 +66,7 @@ export class ItemsDetails extends Component {
       itemsActions.edit(id, { quantity: newQuantity < 0 ? 0 : newQuantity })
     );
   };
+
   getItem = () => {
     const { id, items } = this.props;
     if (items) {
@@ -72,9 +74,11 @@ export class ItemsDetails extends Component {
       this.setState({ item });
     }
   };
+
   componentDidMount() {
     this.getItem();
   }
+
   componentDidUpdate(prevProps) {
     if (
       this.props.id !== prevProps.id ||
@@ -83,6 +87,7 @@ export class ItemsDetails extends Component {
       this.getItem();
     }
   }
+
   render() {
     const { item } = this.state;
     if (!item)

@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actions as itemsActions } from '../../redux/items';
-import { RowXS as Row } from '../Layout/Row';
 import Col from 'reactstrap/lib/Col';
 import Alert from 'reactstrap/lib/Alert';
+import Button from 'reactstrap/lib/Button';
+import ItemsImage from './ItemsImage';
+import { RowXS as Row } from '../Layout/Row';
 import Form from '../Form';
 import Input from '../Form/Input';
 import Select from '../Form/Select';
-import Button from 'reactstrap/lib/Button';
-import ItemsImage from './ItemsImage';
 import { errorMessages } from '../Form/validation';
+import { actions as itemsActions } from '../../redux/items';
 
 export class ItemsAddForm extends Component {
   state = {
     data: null,
     alert: null,
   };
+
   onChange = data => this.setState({ data });
+
   onSubmit = data => {
     this.props.dispatch(itemsActions.add(data));
     this.form.reset();
+    this.showAlert();
+  };
+
+  showAlert = () => {
     this.setState({
-      alert: setTimeout(() => {
-        this.setState({ alert: null });
-      }, 3000),
+      alert: setTimeout(() => this.setState({ alert: null }), 3000),
     });
   };
+
   componentWillUnmount() {
     if (this.state.alert) clearTimeout(this.state.alert);
   }
+
   render() {
     const { categories } = this.props;
     return (

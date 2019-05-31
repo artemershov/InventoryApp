@@ -8,15 +8,19 @@ export default class List {
     this.lastId = 0;
     if (data) this.setData(data);
   }
+
   getList() {
     return { ...this.list };
   }
+
   getOrder() {
     return [...this.order];
   }
+
   getLastId() {
     return this.lastId;
   }
+
   getData() {
     return {
       list: this.getList(),
@@ -24,20 +28,25 @@ export default class List {
       lastId: this.getLastId(),
     };
   }
+
   setList(data) {
     this.list = data;
   }
+
   setOrder(data) {
     this.order = data;
   }
+
   setLastId(id) {
     this.lastId = id;
   }
+
   setData({ list = null, order = null, lastId = null }) {
     if (list) this.setList(list);
     if (order) this.setOrder(order);
     if (lastId) this.setLastId(lastId);
   }
+
   add(data) {
     const lastId = this.lastId + 1;
     const list = { ...this.list, [lastId]: data };
@@ -45,11 +54,13 @@ export default class List {
     this.setData({ list, order, lastId });
     return lastId;
   }
+
   edit(id, data) {
     const item = this.list[id];
     this.setList({ ...this.list, [id]: { ...item, ...data } });
     return id;
   }
+
   remove(id) {
     const list = omit(this.list, id);
     const order = without(this.order, id);

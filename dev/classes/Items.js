@@ -17,21 +17,21 @@ export class Item {
 }
 
 export default class ItemsList extends List {
-  constructor(data) {
-    super(data);
-  }
   add(data) {
     const item = new Item(this.lastId + 1, data);
     return super.add(item);
   }
+
   edit(id, data) {
     const item = new Item(id, { ...this.list[id], ...data });
     this.setList({ ...this.list, [id]: item });
     return id;
   }
+
   getItems() {
     return this.order.map(i => this.list[i]);
   }
+
   search(query) {
     const regexp = new RegExp(query, 'gi');
     return this.getItems().filter(
