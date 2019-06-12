@@ -42,15 +42,15 @@ export class Auth extends Component {
     const data =
       pathname == '/signin'
         ? {
-          title: 'Sign In',
-          form: <SignIn onSubmit={this.onSubmit} onChange={this.onChange} />,
-          link: <Link to="/signup">Create account</Link>,
-        }
+            title: 'Sign In',
+            form: <SignIn onSubmit={this.onSubmit} onChange={this.onChange} />,
+            link: <Link to="/signup">Create account</Link>,
+          }
         : {
-          title: 'Sign Up',
-          form: <SignUp onSubmit={this.onSubmit} onChange={this.onChange} />,
-          link: <Link to="/signin">Already have an account?</Link>,
-        };
+            title: 'Sign Up',
+            form: <SignUp onSubmit={this.onSubmit} onChange={this.onChange} />,
+            link: <Link to="/signin">Already have an account?</Link>,
+          };
     return (
       <Container className="d-flex justify-content-center align-items-center py-4">
         <Row className="justify-content-center w-100">

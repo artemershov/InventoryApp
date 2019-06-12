@@ -66,11 +66,11 @@ export class ItemsList extends Component {
     const { query, filtered } = this.state;
     const data = categories
       ? categories.map(cat => ({
-        ...cat,
-        items: (query ? filtered : items).filter(i =>
-          cat.items.includes(i.id)
-        ),
-      }))
+          ...cat,
+          items: (query ? filtered : items).filter(i =>
+            cat.items.includes(i.id)
+          ),
+        }))
       : [];
     return items && items.length ? (
       <Fragment>
